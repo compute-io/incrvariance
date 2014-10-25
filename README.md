@@ -83,7 +83,7 @@ For example, suppose every 2 seconds your application receives a new value from 
 
 In a streaming implementation, the updated sample variance is either pooled (chunked) or automatically piped to a new destination. The consumer is ultimately responsible for discarding incoming observations.
 
-In contrast to the streaming (push) model, an incremental implementation provides a pull model in which consumers can choose when to probe for new values. Such behavior is important if we consider that, instead of observing on a regular interval (streaming), observations may be random. This module is more amenable to such observation indeterminacy.
+In contrast to the streaming (push) model, an incremental implementation provides a pull model in which consumers can choose when to observe the current value. Such behavior is important if we consider that, instead of observing on a regular interval (streaming), observations may be random. This module is more amenable to such observation indeterminacy.
 
 
 
