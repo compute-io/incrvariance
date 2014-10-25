@@ -19,14 +19,48 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 To use the module,
 
 ``` javascript
-var lib = require( 'compute-incrvariance' );
+var incrvariance = require( 'compute-incrvariance' );
+```
+
+#### incrvariance()
+
+Returns an initialized method to compute a sample variance incrementally.
+
+``` javascript
+var variance = incrvariance();
+```
+
+#### variance( [value] )
+
+If provided a `value`, the method updates and returns the updated sample variance. If not provided a `value`, the method returns the current sample variance.
+
+``` javascript
+variance( 2 );
+
+console.log( variance( 1 ) );
+// returns 0.5
+
+variance( 3 );
+
+console.log( variance() );
+// returns ~0.67
 ```
 
 
 ## Examples
 
 ``` javascript
-var lib = require( 'compute-incrvariance' );
+var incrvariance = require( 'compute-incrvariance' );
+
+// Initialize a method to calculate the sample variance incrementally:
+var variance = incrvariance();
+
+// Simulate some data...
+for ( var i = 0; i < 1000; i++ ) {
+	variance( Math.random() * 100 );
+}
+
+console.log( variance() );
 ```
 
 To run the example code from the top-level application directory,
@@ -34,6 +68,23 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
+
+## Notes
+
+The use case for this module differs from the conventional [vector](https://github.com/compute-io/variance) implementation and the [stream](https://github.com/flow-io/?query=variance) implementation.
+
+The use case for the vector implementation is where you have a known dataset and want to calculate a summary statistic (i.e., a single number characterizing the central tendency).
+
+The use case for the stream implementation is where you have either (1) a stream source, which may or may not be definite, or (2) a desire to continually stream each updated value.
+
+The incremental implementation overlaps both use cases, but also provides an additional benefit. Namely, this module decouples the act of updating the sample variance from the act of consuming the sample variance.
+
+For example, suppose every 2 seconds your application receives a new value from a remote data source and you want to continuously update the sample variance.
+
+In a streaming implementation, the updated sample variance is either pooled (chunked) or automatically piped to a new destination. The consumer is ultimately responsible for discarding incoming observations.
+
+In contrast to the streaming (push) model, an incremental implementation provides a pull model in which consumers can choose when to probe for new values. Such behavior is important if we consider that, instead of observing on a regular interval (streaming), observations may be random. This module is more amenable to such observation indeterminacy.
+
 
 
 ## Tests

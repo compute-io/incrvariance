@@ -25,7 +25,19 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "statistics",
+    "stats",
+    "mathematics",
+    "math",
+    "variance",
+    "sample variance",
+    "var",
+    "dispersion",
+    "standard deviation",
+    "stdev",
+    "central tendency",
+    "incremental"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/incrvariance/issues"
