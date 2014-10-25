@@ -43,7 +43,7 @@ console.log( variance( 1 ) );
 variance( 3 );
 
 console.log( variance() );
-// returns ~0.67
+// returns 1
 ```
 
 
