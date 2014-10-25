@@ -30,11 +30,8 @@ describe( 'compute-incrvariance', function tests() {
 	it( 'should compute a sample variance incrementally', function test() {
 		var data,
 			N,
-			sum,
-			d,
 			expected,
 			actual,
-			mean,
 			variance;
 
 		data = [ 2, 3, 2, 4, 3, 4 ];
@@ -45,10 +42,9 @@ describe( 'compute-incrvariance', function tests() {
 
 		variance = incrvariance();
 
-		sum = 0;
 		for ( var i = 0; i < N; i++ ) {
 			expected[ i ] = calc( data.slice( 0, i+1 ) );
-			actual[ i ] = variance( d );
+			actual[ i ] = variance( data[ i ] );
 		}
 
 		assert.deepEqual( actual, expected );
@@ -66,7 +62,7 @@ describe( 'compute-incrvariance', function tests() {
 			}
 			mean = sum / N;
 			for ( var j = 0; j < N; j++ ) {
-				M2 += Math.pow( arr[i], 2 );
+				M2 += Math.pow( arr[j]-mean, 2 );
 			}
 			return M2 / (N-1);
 		}
