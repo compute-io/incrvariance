@@ -1,6 +1,6 @@
 {
   "name": "compute-incrvariance",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Provides a method to compute a sample variance incrementally.",
   "author": {
     "name": "Athan Reines",
